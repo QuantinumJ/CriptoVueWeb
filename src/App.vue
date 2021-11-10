@@ -1,8 +1,8 @@
 <template>
-  <div class="container mx-auto flex flex-col items-center bg-gray-100 p-4">
+  <div class="container flex flex-col items-center bg-gray-100 p-4">
     <!-- <div
       class="
-         fixed 
+        fixed
         w-100
         h-100
         opacity-80
@@ -42,7 +42,7 @@
             <label for="wallet" class="block text-sm font-medium text-gray-700"
               >Тикер</label
             >
-            <div class="mt-1 relative rounded-md shadow-md" >
+            <div class="mt-1 relative rounded-md shadow-md">
               <input
                 v-model="tiker"
                 v-on:keydown.enter="add"
@@ -63,9 +63,7 @@
               />
             </div>
             <div
-              
               class="flex bg-white shadow-md p-1 rounded-md shadow-md flex-wrap"
-
             >
               <span
                 class="
@@ -81,7 +79,7 @@
                   cursor-pointer
                 "
               >
-                 BTC
+                BTC
               </span>
               <span
                 class="
@@ -247,12 +245,12 @@
           {{ sel.name }} - USD
         </h3>
         <div class="flex items-end border-gray-600 border-b border-l h-64">
-          <div 
-          v-for="(bar,idx) in normaleGraph()"
-          :key="idx"
-          :style="{height:`${bar}%`}"
-          class="bg-purple-800 border w-10 h-24">
-          </div>
+          <div
+            v-for="(bar, idx) in normaleGraph()"
+            :key="idx"
+            :style="{ height: `${bar}%` }"
+            class="bg-purple-800 border w-10 h-24"
+          ></div>
         </div>
         <button
           @click="sel = null"
@@ -294,14 +292,14 @@ export default {
       tiker: "",
       tikers: [],
       sel: null,
-      graph:[]
+      graph: [],
     };
   },
   methods: {
     add() {
       const newTiker = {
         name: this.tiker,
-        price: "-"
+        price: "-",
       };
 
       this.tikers.push(newTiker);
@@ -314,9 +312,9 @@ export default {
         this.tikers.find((t) => t.name === newTiker.name).price =
           data.USD > 1 ? data.USD.toFixed(2) : data.USD.toPrecision(2);
 
-          if(this.sel?.name===newTiker.name){
-            this.graph.push(data.USD);
-          }
+        if (this.sel?.name === newTiker.name) {
+          this.graph.push(data.USD);
+        }
       }, 6000);
 
       this.tiker = "";
@@ -324,17 +322,15 @@ export default {
     remove(tikRemove) {
       this.tikers = this.tikers.filter((t) => t != tikRemove);
     },
-    normaleGraph(){
-      const maxValue= Math.max(...this.graph);
-      const minValue= Math.min(...this.graph);
-      return this.graph.map(price =>(price - minValue)*100/(maxValue-minValue)
+    normaleGraph() {
+      const maxValue = Math.max(...this.graph);
+      const minValue = Math.min(...this.graph);
+      return this.graph.map(
+        (price) => ((price - minValue) * 100) / (maxValue - minValue)
       );
-
-
-
-    }
+    },
   },
 };
 </script>
 
-<style src="./app.css"></style>
+<style></style>
